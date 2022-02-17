@@ -81,7 +81,6 @@ def compute_histogram(data):
     return np.array([np.histogram(row, bins=256, range=(0, 255))[0] for row in data])
 
 def train_classifier(classifier, X_train, y_train, X_test):
-    classifier=RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1)
     classifier.fit(X_train, y_train)
     return classifier
 
@@ -108,10 +107,10 @@ def load_mnist_data():
     X_train_data, y_train_data = load_mnist('data/fashion-mnist', kind='train')
     X_test_data, y_test_data = load_mnist('data/fashion-mnist', kind='t10k')
 
-    X_train_freqs = compute_histogram(X_train_data[:200])
-    X_test_freqs = compute_histogram(X_test_data[:200])
-    y_train_data = y_train_data[:200]
-    y_test_data = y_test_data[:200]
+    X_train_freqs = compute_histogram(X_train_data)
+    X_test_freqs = compute_histogram(X_test_data)
+    y_train_data = y_train_data
+    y_test_data = y_test_data
 
     # X_train, X_test, y_train, y_test = train_test_split(
     #     X_train_freqs, y_train_data, test_size=0.3, random_state=42
