@@ -85,7 +85,7 @@ MiniVGGNet without augmentations with a learning rate of 1e-2 yielded the best s
 
 The LFW faces dataset was found to perform best with the MiniGoogLeNet architecture with augmentation enabled and a learning rate of 1e-1. The macro averages for precision: 0.87, recall: 0.83, and f1 score: 0.83. The weighted averages for precision: 0.90, recall: 0.88, f1 score: 0.88. The accuracy was 0.88.
 
-It was found, however, that augmentation comes with a higher volatility when it comes to the learning curve for the validation set. With augmentation disabled, MiniGoogLeNet also overperformed Fashion MNIST. With learning rate 1e-1, the macro averages for precision: 0.84, recall: 0.82, and f1 score: 0.82. The weighted averages for precision: 0.87, recall: 0.86, f1 score: 0.86. The accuracy was 0.86.
+It was found, however, that augmentation comes with a higher volatility when it comes to the learning curve for the validation set. With augmentation disabled, the learning rate 1e-1, the macro averages for precision: 0.84, recall: 0.82, and f1 score: 0.82. The weighted averages for precision: 0.87, recall: 0.86, f1 score: 0.86. The accuracy was 0.86.
 
 The mistakes to be found in the confusion matrices for the MNIST dataset make sense: tops are most commonly mistaken as shirts. Pullovers are most commonly mistaken as coats and shirts. Shirts are most commonly mistaken as coats or tops. Ankle boots are most commonly mistaken as sneakers.
 
