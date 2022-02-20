@@ -96,7 +96,7 @@ def reshape_pixels(data=None, pixels=None, nr_of_images=None):
 
 def compute_sift_train(n_words=3, random_state=42, n_jobs=3, pixels=28, nr_of_images=60000, data=None):
     data_reshaped = reshape_pixels(data=data, pixels=pixels, nr_of_images=nr_of_images)
-    sift = SIFT(n_scales=5, n_octaves=8, c_dog=0.001, c_edge=15)
+    sift = SIFT(n_scales=5, n_octaves=3, c_dog=0.0001, c_edge=20)
     descriptors = extract_descriptors(n_jobs=n_jobs, sift=sift, images=data_reshaped)
     dictionary = KMeans(n_clusters=n_words, random_state=random_state)
     dictionary = cluster_descriptors(dictionary=dictionary, descriptors=descriptors)
@@ -105,7 +105,7 @@ def compute_sift_train(n_words=3, random_state=42, n_jobs=3, pixels=28, nr_of_im
 
 def compute_sift_test(n_words=3, random_state=42, n_jobs=3, pixels=28, nr_of_images=60000, data=None, dictionary=None):
     data_reshaped = reshape_pixels(data=data, pixels=pixels, nr_of_images=nr_of_images)
-    sift = SIFT(n_scales=5, n_octaves=8, c_dog=0.001, c_edge=15)
+    sift = SIFT(n_scales=5, n_octaves=3, c_dog=0.0001, c_edge=20)
     descriptors = extract_descriptors(n_jobs=n_jobs, sift=sift, images=data_reshaped)
     data_transformed = extract_histograms(n_jobs=n_jobs, descriptors=descriptors, dictionary=dictionary)
     return data_transformed
