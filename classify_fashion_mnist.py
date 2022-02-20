@@ -1,9 +1,10 @@
 import os
+import gzip
 import numpy as np
 import time
 from matplotlib import pyplot as plt
+from joblib import Parallel, delayed
 from sklearn import metrics
-from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import GaussianNB
@@ -11,11 +12,11 @@ from sklearn.svm import SVC
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.neural_network import MLPClassifier
-def load_mnist(path, kind='train'):
-    import os
-    import gzip
-    import numpy as np
+from sklearn.cluster import KMeans
+from skimage.feature import SIFT
+from handle_sift import *
 
+def load_mnist(path, kind='train'):
     """Load MNIST data from `path`"""
     labels_path = os.path.join(path,
                                '%s-labels-idx1-ubyte.gz'
@@ -36,6 +37,10 @@ def load_mnist(path, kind='train'):
 
 def load_classifiers():
     names = [
+        "Random_Forest_md5_ne10",
+        "Random_Forest_md10_ne100",
+        "Random_Forest_md20_ne50",
+        "Random_Forest_md20_ne100",
         "MLPClassifier_relu_constant_5_2",
         "MLPClassifier_relu_constant_50_50_50",
         "MLPClassifier_relu_constant_50_100_50",
@@ -48,10 +53,6 @@ def load_classifiers():
         "Decision_tree_md15",
         "Decision_tree_md35",
         "Decision_tree_md80",
-        "Random_Forest_md5_ne10",
-        "Random_Forest_md10_ne100",
-        "Random_Forest_md20_ne50",
-        "Random_Forest_md20_ne100",
         "Naive_Bayes",
         "QDA",
         "Linear_SVM_lin_0_025",
@@ -63,22 +64,22 @@ def load_classifiers():
     ]
 
     classifier = [
-        MLPClassifier(solver='adam', alpha=1e-5, activation = "relu", learning_rate= "constant", hidden_layer_sizes=(5, 2), random_state=1),
-        MLPClassifier(solver='adam', alpha=1e-5, activation = "relu", learning_rate= "constant", hidden_layer_sizes=(50,50,50), random_state=1),
-        MLPClassifier(solver='adam', alpha=1e-5, activation = "relu", learning_rate= "constant", hidden_layer_sizes=(50,100,50), random_state=1),
-        MLPClassifier(solver='adam', alpha=1e-5, activation = "relu", learning_rate= "constant", hidden_layer_sizes=(100,), random_state=1),
-        MLPClassifier(solver='adam', alpha=1e-5, activation = "tanh", learning_rate= "adaptive", hidden_layer_sizes=(5, 2), random_state=1),
-        MLPClassifier(solver='adam', alpha=1e-5, activation = "tanh", learning_rate= "adaptive", hidden_layer_sizes=(50, 50, 50), random_state=1),
-        MLPClassifier(solver='adam', alpha=1e-5, activation = "tanh", learning_rate= "adaptive", hidden_layer_sizes=(50, 100, 50), random_state=1),
-        MLPClassifier(solver='adam', alpha=1e-5, activation = "tanh", learning_rate= "adaptive", hidden_layer_sizes=(100,), random_state=1),
-        DecisionTreeClassifier(max_depth=3),
-        DecisionTreeClassifier(max_depth=15),
-        DecisionTreeClassifier(max_depth=35),
-        DecisionTreeClassifier(max_depth=80),
         RandomForestClassifier(max_depth=5, n_estimators=10, n_jobs=4),
         RandomForestClassifier(max_depth=10, n_estimators=100, n_jobs=4),
         RandomForestClassifier(max_depth=20, n_estimators=50, n_jobs=4),
         RandomForestClassifier(max_depth=20, n_estimators=100, n_jobs=4),
+        MLPClassifier(solver='adam', alpha=1e-5, activation = "relu", learning_rate= "constant", hidden_layer_sizes=(5, 2), random_state=1, max_iter=1000),
+        MLPClassifier(solver='adam', alpha=1e-5, activation = "relu", learning_rate= "constant", hidden_layer_sizes=(50,50,50), random_state=1, max_iter=1000),
+        MLPClassifier(solver='adam', alpha=1e-5, activation = "relu", learning_rate= "constant", hidden_layer_sizes=(50,100,50), random_state=1, max_iter=1000),
+        MLPClassifier(solver='adam', alpha=1e-5, activation = "relu", learning_rate= "constant", hidden_layer_sizes=(100,), random_state=1, max_iter=1000),
+        MLPClassifier(solver='adam', alpha=1e-5, activation = "tanh", learning_rate= "adaptive", hidden_layer_sizes=(5, 2), random_state=1, max_iter=1000),
+        MLPClassifier(solver='adam', alpha=1e-5, activation = "tanh", learning_rate= "adaptive", hidden_layer_sizes=(50, 50, 50), random_state=1, max_iter=1000),
+        MLPClassifier(solver='adam', alpha=1e-5, activation = "tanh", learning_rate= "adaptive", hidden_layer_sizes=(50, 100, 50), random_state=1, max_iter=1000),
+        MLPClassifier(solver='adam', alpha=1e-5, activation = "tanh", learning_rate= "adaptive", hidden_layer_sizes=(100,), random_state=1, max_iter=1000),
+        DecisionTreeClassifier(max_depth=3),
+        DecisionTreeClassifier(max_depth=15),
+        DecisionTreeClassifier(max_depth=35),
+        DecisionTreeClassifier(max_depth=80),
         GaussianNB(),
         QuadraticDiscriminantAnalysis(),
         SVC(kernel="linear", C=0.025),
@@ -116,6 +117,7 @@ def store_metrics(predicted, y_test, name):
     disp.figure_.suptitle("Confusion Matrix: " + name)
     np.savetxt("results/" + name + "/CM_" + name + "predicted.txt", disp.confusion_matrix.astype(int), fmt="%i")
     plt.savefig("results/" + name + "/CM_" + name + "predicted.png")
+    plt.close()
     np.savetxt("results/" + name + "/" + name + "predicted.txt", predicted.astype(int), fmt="%i")
 
 
@@ -123,27 +125,39 @@ def load_mnist_data():
     X_train_data, y_train_data = load_mnist('data/fashion-mnist', kind='train')
     X_test_data, y_test_data = load_mnist('data/fashion-mnist', kind='t10k')
 
+    return X_train_data, y_train_data, X_test_data, y_test_data
+
+def transform_w_histograms(X_train_data, y_train_data, X_test_data, y_test_data):
     X_train_freqs = compute_histogram(X_train_data)
     X_test_freqs = compute_histogram(X_test_data)
-    y_train_data = y_train_data
-    y_test_data = y_test_data
-
-    # X_train, X_test, y_train, y_test = train_test_split(
-    #     X_train_freqs, y_train_data, test_size=0.3, random_state=42
-    #     )
-
-    X_train = X_train_freqs
-    y_train = y_train_data
-    X_test = X_test_freqs
-    y_test = y_test_data
+    X_train = X_train_freqs[:200]
+    y_train = y_train_data[:200]
+    X_test = X_test_freqs[:200]
+    y_test = y_test_data[:200]
 
     return X_train, X_test, y_train, y_test
 
 if __name__ == "__main__":
+    method = "SIFT"
+    n_words = 100
+    random_state = 42
+    pixels = 28
+    n_jobs = 6
+
     print("Loading Classifiers.\n")
     names, classifiers = load_classifiers()
     print("Loading mnist-data.\n")
-    X_train, X_test, y_train, y_test = load_mnist_data()
+    X_train_data, y_train_data, X_test_data, y_test_data = load_mnist_data()
+    print("Transform data using histograms.\n")
+
+    if method == "SIFT":
+        X_train, X_test, y_train, y_test = transform_w_sift(n_words=n_words, random_state=random_state,
+                                                            n_jobs=n_jobs, pixels=pixels, X_train_data=X_train_data,
+                                                            y_train_data=y_train_data, X_test_data=X_test_data,
+                                                            y_test_data=y_test_data)
+    else:
+        X_train, X_test, y_train, y_test = transform_w_histograms(X_train_data, y_train_data, X_test_data, y_test_data)
+
     print("Training Classifiers.\n")
     for name, classifier in zip(names, classifiers):
         print("Training " + name + ".\n")
