@@ -11,10 +11,10 @@ def compute_histogram(data):
 def transform_w_histograms(X_train_data, y_train_data, X_test_data, y_test_data):
     X_train_freqs = compute_histogram(X_train_data)
     X_test_freqs = compute_histogram(X_test_data)
-    X_train = X_train_freqs[:200]
-    y_train = y_train_data[:200]
-    X_test = X_test_freqs[:200]
-    y_test = y_test_data[:200]
+    X_train = X_train_freqs
+    y_train = y_train_data
+    X_test = X_test_freqs
+    y_test = y_test_data
 
     return X_train, X_test, y_train, y_test
 
@@ -111,18 +111,18 @@ def compute_sift_test(n_words=3, random_state=42, n_jobs=3, pixels=28, nr_of_ima
     return data_transformed
 
 def transform_w_sift(n_words=3, random_state=42, n_jobs=3, pixels=28, X_train_data=None, y_train_data=None, X_test_data=None, y_test_data=None):
-    data = X_train_data[:200]
+    data = X_train_data
     nr_of_images= data.shape[0]
     X_train, dictionary = compute_sift_train(n_words=n_words, random_state=random_state,
                                n_jobs=n_jobs, pixels=pixels,
                                nr_of_images=nr_of_images, data=data)
-    data = X_test_data[:50]
+    data = X_test_data
     nr_of_images = data.shape[0]
     X_test = compute_sift_test(n_words=n_words, random_state=random_state,
                               n_jobs=n_jobs, pixels=pixels,
                               nr_of_images=nr_of_images, data=data, dictionary=dictionary)
-    y_train = y_train_data[:200]
-    y_test = y_test_data[:50]
+    y_train = y_train_data
+    y_test = y_test_data
 
     return X_train, X_test, y_train, y_test
 
