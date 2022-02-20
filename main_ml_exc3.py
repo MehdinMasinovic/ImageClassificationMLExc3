@@ -3,10 +3,10 @@ import argparse
 import json
 from timeit import default_timer as dt
 
-from utils.mnist_utils import *
-from utils.faces_utils import *
-from utils.feature_extraction_utils import *
-from utils.classification_utils import *
+from utils.clothes import *
+from utils.faces import *
+from utils.feature_extraction import *
+from utils.classification import *
 
 
 def change_jsontypes(configuration):
