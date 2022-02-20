@@ -1,6 +1,8 @@
 # ImageClassificationMLExc3
 This project folder / repository stores all codes and data used for the third exercise of ML in the WS 2021/2022 for Group 1. Overall, there are two main implementations, one for the traditional methods and one for the deep learning approach. 
 
+You can also visit our project repository on Github: https://github.com/MehdinMasinovic/ImageClassificationMLExc3
+
 # Dependencies
 Before running any scripts, please make sure that you have installed the required packages and versions from the "requirements.txt" file in this repository using:
 
