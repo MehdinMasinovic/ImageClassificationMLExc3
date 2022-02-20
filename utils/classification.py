@@ -1,6 +1,7 @@
 import os
 import time
 import numpy as np
+import pandas as pd
 from matplotlib import pyplot as plt
 
 from sklearn.tree import DecisionTreeClassifier
@@ -11,6 +12,7 @@ from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.neural_network import MLPClassifier
 
 from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import classification_report
 
 def retrieve_classifier(configuration):
     model_name = configuration['name']
@@ -66,23 +68,25 @@ def make_prediction(classifier, X_test):
     return predicted
 
 def store_metrics(predicted, y_test, data, extract_feature_with, experiment_setup, name, extractFeatures=None, trainClassifier=None, makePrediction=None):
-    t = time.localtime()
-    current_time = time.strftime("T%H_%M_", t)
 
-    if not os.path.exists("results/" + current_time + data + "_" + extract_feature_with + "_" + name):
-        os.mkdir("results/" + current_time + data + "_" + extract_feature_with + "_" + name)
+    if not os.path.exists("results/" + data + "_" + extract_feature_with + "_" + name):
+        os.mkdir("results/" + data + "_" + extract_feature_with + "_" + name)
 
     # Save confusion matrix
+    report = pd.DataFrame(classification_report(y_test, predicted, output_dict=True)).transpose()
+    report.to_csv("results/" + data + "_" + extract_feature_with + "_" + name + "/Report_" + data + "_" + extract_feature_with + "_" + experiment_setup + ".csv")
+
     disp = ConfusionMatrixDisplay.from_predictions(y_test, predicted)
     disp.figure_.suptitle("Confusion Matrix: " + data + "_" + name)
-    np.savetxt("results/" + current_time + data + "_" + extract_feature_with + "_" + name + "/CM_" + data + "_" + extract_feature_with + "_" + experiment_setup + "_predicted.txt",
+    np.savetxt("results/" + data + "_" + extract_feature_with + "_" + name + "/CM_" + data + "_" + extract_feature_with + "_" + experiment_setup + "_predicted.txt",
                disp.confusion_matrix.astype(int), fmt="%i")
     # Plot confusion matrix
-    plt.savefig("results/" + current_time + data + "_" + extract_feature_with + "_" + name + "/CM_" + data + "_" + extract_feature_with + "_" + experiment_setup + "_predicted.png")
+    plt.savefig("results/" + data + "_" + extract_feature_with + "_" + name + "/CM_" + data + "_" + extract_feature_with + "_" + experiment_setup + "_predicted.png")
     plt.close()
     # Save predictions
-    np.savetxt("results/" + current_time + data + "_" + extract_feature_with + "_" + name + "/" + data + "_" + extract_feature_with + "_" + experiment_setup + "_predicted.txt",
+    np.savetxt("results/" + data + "_" + extract_feature_with + "_" + name + "/" + data + "_" + extract_feature_with + "_" + experiment_setup + "_predicted.txt",
                predicted.astype(int), fmt="%i")
     # Save timing
-    np.savetxt("results/" + current_time + data + "_" + extract_feature_with + "_" + name + "/" + data + "_" + extract_feature_with + "_" + experiment_setup + "_timing.txt",
+    np.savetxt("results/" + data + "_" + extract_feature_with + "_" + name + "/" + data + "_" + extract_feature_with + "_" + experiment_setup + "_timing.txt",
                np.array([extractFeatures, trainClassifier, makePrediction]).astype(int), fmt="%i")
+

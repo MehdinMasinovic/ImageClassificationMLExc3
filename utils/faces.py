@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 def fetch_lfw():
     #Following part is based on the import to be found in
     #https://github.com/emanuelfakh/Face-Recognition/blob/master/FR_Final.ipynb
-    lfw_people = fetch_lfw_people(resize=0.315, color=False, min_faces_per_person=20, slice_=(slice(48, 202), slice(48, 202)))
+    lfw_people = fetch_lfw_people(resize=1, color=True, min_faces_per_person=20, slice_=(slice(48, 202), slice(48, 202)))
     X = lfw_people.images
     y = lfw_people.target
     target_names = lfw_people.target_names
