@@ -1,16 +1,4 @@
 <<<<<<< HEAD:outdated/classify_fashion_mnist.py
-import os
-import gzip
-import numpy as np
-import time
-from matplotlib import pyplot as plt
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.svm import SVC
-from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
-from sklearn.metrics import ConfusionMatrixDisplay
-from sklearn.neural_network import MLPClassifier
 from outdated.handle_sift import *
 
 def load_mnist(path, kind='train'):
@@ -176,8 +164,6 @@ import gzip
 import numpy as np
 import time
 from matplotlib import pyplot as plt
-from joblib import Parallel, delayed
-from sklearn import metrics
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import GaussianNB
@@ -185,9 +171,7 @@ from sklearn.svm import SVC
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.neural_network import MLPClassifier
-from sklearn.cluster import KMeans
-from skimage.feature import SIFT
-from handle_sift import *
+from outdated.handle_sift import *
 
 def load_mnist(path, kind='train'):
     """Load MNIST data from `path`"""
