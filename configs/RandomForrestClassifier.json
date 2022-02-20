@@ -1,0 +1,26 @@
+{
+    "RandomForrest_MaxDepth_5_NrEstimators_10": {
+		"name": "RandomForrestClassifier",
+        "max_depth": 5,
+        "n_estimators" : 10,
+        "n_jobs" : 3
+    },
+	"RandomForrest_MaxDepth_10_NrEstimators_100": {
+		"name": "RandomForrestClassifier",
+        "max_depth": 10,
+        "n_estimators" : 100,
+        "n_jobs" : 3
+    },
+	"RandomForrest_MaxDepth_20_NrEstimators_50": {
+		"name": "RandomForrestClassifier",
+        "max_depth": 20,
+        "n_estimators" : 50,
+        "n_jobs" : 3
+    },
+	"RandomForrest_MaxDepth_20_NrEstimators_100": {
+		"name": "RandomForrestClassifier",
+        "max_depth": 20,
+        "n_estimators" : 100,
+        "n_jobs" : 3
+    }
+}

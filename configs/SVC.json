@@ -1,0 +1,38 @@
+{
+	"SupportVectorMachine_KernelLinear_C_0_025": {
+		"name": "SVC",
+		"kernel": "linear",
+		"gamma": "scale",
+		"C": 0.025
+	},
+	"SupportVectorMachine_KernelLinear_C_0_5": {
+		"name": "SVC",
+		"kernel": "linear",
+		"gamma": "scale",
+		"C": 0.5
+	},
+	"SupportVectorMachine_KernelLinear_C_1": {
+		"name": "SVC",
+		"kernel": "linear",
+		"gamma": "scale",
+		"C": 1
+	},
+	"SupportVectorMachine_KernelRbf_C_0_025": {
+		"name": "SVC",
+		"kernel": "rbf",
+		"gamma": 2,
+		"C": 0.025
+	},
+	"SupportVectorMachine_KernelRbf_C_0_5": {
+		"name": "SVC",
+		"kernel": "rbf",
+		"gamma": 2,
+		"C": 0.5
+	},
+	"SupportVectorMachine_KernelRbf_C_1": {
+		"name": "SVC",
+		"kernel": "rbf",
+		"gamma": 2,
+		"C": 1
+	}
+}

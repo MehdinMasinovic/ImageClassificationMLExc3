@@ -1,0 +1,18 @@
+{
+	"DecisionTree_MaxDepth_3": {
+		"name": "DecisionTreeClassifier",
+		"max_depth": 3
+	},
+	"DecisionTree_MaxDepth_15": {
+		"name": "DecisionTreeClassifier",
+		"max_depth": 15
+	},
+	"DecisionTree_MaxDepth_35": {
+		"name": "DecisionTreeClassifier",
+		"max_depth": 35
+	},
+	"DecisionTree_MaxDepth_80": {
+		"name": "DecisionTreeClassifier",
+		"max_depth": 80
+	}
+}

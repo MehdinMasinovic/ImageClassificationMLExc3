@@ -1,0 +1,8 @@
+{
+	"NaiveBayes": {
+		"name": "GaussianNB"
+	},
+	"QuadraticDiscriminantAnalysis": {
+		"name": "QuadraticDiscriminantAnalysis"
+	}
+}

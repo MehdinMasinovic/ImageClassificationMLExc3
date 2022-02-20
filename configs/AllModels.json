@@ -1,0 +1,165 @@
+{
+    "RandomForrest_MaxDepth_5_NrEstimators_10": {
+		"name": "RandomForrestClassifier",
+        "max_depth": 5,
+        "n_estimators" : 10,
+        "n_jobs" : 3
+    },
+	"RandomForrest_MaxDepth_10_NrEstimators_100": {
+		"name": "RandomForrestClassifier",
+        "max_depth": 10,
+        "n_estimators" : 100,
+        "n_jobs" : 3
+    },
+	"RandomForrest_MaxDepth_20_NrEstimators_50": {
+		"name": "RandomForrestClassifier",
+        "max_depth": 20,
+        "n_estimators" : 50,
+        "n_jobs" : 3
+    },
+	"RandomForrest_MaxDepth_20_NrEstimators_100": {
+		"name": "RandomForrestClassifier",
+        "max_depth": 20,
+        "n_estimators" : 100,
+        "n_jobs" : 3
+    },
+	
+	"MLPClassifier_ActivationRelu_LearningConstant_Layers_5_2": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "relu",
+		"learning_rate": "constant",
+		"hidden_layer_sizes": [5, 2],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"MLPClassifier_ActivationRelu_LearningConstant_Layers_50_50_50": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "relu",
+		"learning_rate": "constant",
+		"hidden_layer_sizes": [50, 50, 50],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"MLPClassifier_ActivationRelu_LearningConstant_Layers_50_100_50": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "relu",
+		"learning_rate": "constant",
+		"hidden_layer_sizes": [50, 100, 50],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"MLPClassifier_ActivationRelu_LearningConstant_Layers_100": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "relu",
+		"learning_rate": "constant",
+		"hidden_layer_sizes": [100],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"MLPClassifier_ActivationTanh_LearningAdaptive_Layers_5_2": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "tanh",
+		"learning_rate": "adaptive",
+		"hidden_layer_sizes": [5, 2],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"MLPClassifier_ActivationTanh_LearningAdaptive_Layers_50_50_50": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "tanh",
+		"learning_rate": "adaptive",
+		"hidden_layer_sizes": [50, 50, 50],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"MLPClassifier_ActivationTanh_LearningAdaptive_Layers_50_100_50": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "tanh",
+		"learning_rate": "adaptive",
+		"hidden_layer_sizes": [50, 100, 50],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"MLPClassifier_ActivationTanh_LearningAdaptive_Layers_100": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "tanh",
+		"learning_rate": "adaptive",
+		"hidden_layer_sizes": [100],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"DecisionTree_MaxDepth_3": {
+		"name": "DecisionTreeClassifier",
+		"max_depth": 3
+	},
+	"DecisionTree_MaxDepth_15": {
+		"name": "DecisionTreeClassifier",
+		"max_depth": 15
+	},
+	"DecisionTree_MaxDepth_35": {
+		"name": "DecisionTreeClassifier",
+		"max_depth": 35
+	},
+	"DecisionTree_MaxDepth_80": {
+		"name": "DecisionTreeClassifier",
+		"max_depth": 80
+	},
+	"NaiveBayes": {
+		"name": "GaussianNB"
+	},
+	"QuadraticDiscriminantAnalysis": {
+		"name": "QuadraticDiscriminantAnalysis"
+	},
+	"SupportVectorMachine_KernelLinear_C_0_025": {
+		"name": "SVC",
+		"kernel": "linear",
+		"gamma": "scale",
+		"C": 0.025
+	},
+	"SupportVectorMachine_KernelLinear_C_0_5": {
+		"name": "SVC",
+		"kernel": "linear",
+		"gamma": "scale",
+		"C": 0.5
+	},
+	"SupportVectorMachine_KernelLinear_C_1": {
+		"name": "SVC",
+		"kernel": "linear",
+		"gamma": "scale",
+		"C": 1
+	},
+	"SupportVectorMachine_KernelRbf_C_0_025": {
+		"name": "SVC",
+		"kernel": "rbf",
+		"gamma": 2,
+		"C": 0.025
+	},
+	"SupportVectorMachine_KernelRbf_C_0_5": {
+		"name": "SVC",
+		"kernel": "rbf",
+		"gamma": 2,
+		"C": 0.5
+	},
+	"SupportVectorMachine_KernelRbf_C_1": {
+		"name": "SVC",
+		"kernel": "rbf",
+		"gamma": 2,
+		"C": 1
+	}
+}

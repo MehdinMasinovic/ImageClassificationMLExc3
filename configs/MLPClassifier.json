@@ -1,0 +1,82 @@
+{
+	"MLPClassifier_ActivationRelu_LearningConstant_Layers_5_2": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "relu",
+		"learning_rate": "constant",
+		"hidden_layer_sizes": [5, 2],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"MLPClassifier_ActivationRelu_LearningConstant_Layers_50_50_50": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "relu",
+		"learning_rate": "constant",
+		"hidden_layer_sizes": [50, 50, 50],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"MLPClassifier_ActivationRelu_LearningConstant_Layers_50_100_50": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "relu",
+		"learning_rate": "constant",
+		"hidden_layer_sizes": [50, 100, 50],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"MLPClassifier_ActivationRelu_LearningConstant_Layers_100": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "relu",
+		"learning_rate": "constant",
+		"hidden_layer_sizes": [100],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"MLPClassifier_ActivationTanh_LearningAdaptive_Layers_5_2": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "tanh",
+		"learning_rate": "adaptive",
+		"hidden_layer_sizes": [5, 2],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"MLPClassifier_ActivationTanh_LearningAdaptive_Layers_50_50_50": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "tanh",
+		"learning_rate": "adaptive",
+		"hidden_layer_sizes": [50, 50, 50],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"MLPClassifier_ActivationTanh_LearningAdaptive_Layers_50_100_50": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "tanh",
+		"learning_rate": "adaptive",
+		"hidden_layer_sizes": [50, 100, 50],
+		"random_state": 42,
+		"max_iter": 1000
+	},
+	"MLPClassifier_ActivationTanh_LearningAdaptive_Layers_100": {
+		"name": "MLPClassifier",
+		"solver": "adam",
+		"alpha": 0.00001,
+		"activation": "tanh",
+		"learning_rate": "adaptive",
+		"hidden_layer_sizes": [100],
+		"random_state": 42,
+		"max_iter": 1000
+	}
+}
