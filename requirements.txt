@@ -6,5 +6,6 @@ joblib==1.0.0
 opencv-python==4.5.5.62
 imutils==0.5.4
 seaborn==0.11.2
+yellowbrick==1.4
 keras==2.7.0
 tensorflow==2.7.0
