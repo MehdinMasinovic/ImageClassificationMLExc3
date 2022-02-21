@@ -7,7 +7,12 @@ You can also visit our project repository on Github: https://github.com/MehdinMa
 Before running any scripts, please make sure that you have installed the required packages and versions from the "requirements.txt" file in this repository using:
 
 ```{sh}
-pip install -r /path/to/requirements.txt
+pip3 install -r /path/to/requirements.txt
+```
+
+In case the command above raises an error regarding permissions, please try the command below:
+```{sh}
+pip3 install -r requirements.txt --user
 ```
 
 # Running the whole analysis
